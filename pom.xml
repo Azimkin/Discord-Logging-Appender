@@ -6,13 +6,14 @@
 
     <groupId>me.scarsz.jdaappender</groupId>
     <artifactId>parent</artifactId>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
 
     <packaging>pom</packaging>
     <modules>
         <module>common</module>
         <module>jda4</module>
         <module>jda5</module>
+        <module>discord4j</module>
     </modules>
 
     <properties>
@@ -23,12 +24,14 @@
 
     <distributionManagement>
         <repository>
-            <id>scarsz</id>
-            <url>https://nexus.scarsz.me/content/repositories/releases/</url>
+            <id>azimkin-repo-releases</id>
+            <name>Azimkins repository</name>
+            <url>https://repo.azimkin.top/releases</url>
         </repository>
         <snapshotRepository>
-            <id>scarsz</id>
-            <url>https://nexus.scarsz.me/content/repositories/snapshots/</url>
+            <id>azimkin-repo-snapshots</id>
+            <name>Azimkins repository</name>
+            <url>https://repo.azimkin.top/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -63,7 +66,7 @@
             <dependency>
                 <groupId>me.scarsz.jdaappender</groupId>
                 <artifactId>common</artifactId>
-                <version>1.2.3</version>
+                <version>1.2.4</version>
             </dependency>
 
             <dependency>
@@ -90,7 +93,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.7</version>
+                <version>1.2.10</version>
                 <scope>provided</scope>
             </dependency>
             <!--suppress VulnerableLibrariesLocal -->

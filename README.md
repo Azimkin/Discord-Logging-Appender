@@ -1,5 +1,5 @@
-# JDA Appender
-Library for Java applications that use [JDA](https://github.com/DV8FromTheWorld/JDA) to easily stream
+# Discord Logging Appender
+Library for Java applications that use [Discord4j](https://discord4j.com/) or [JDA](https://github.com/DV8FromTheWorld/JDA) to easily stream
 the logging output of the application to a text channel on Discord.
 
 [insert screenshot here]
@@ -8,7 +8,7 @@ the logging output of the application to a text channel on Discord.
 Using default values:
 
 ```java
-ChannelLoggingHandler handler = new ChannelLoggingHandler(() -> jda.getTextChannelById(System.getenv("CHANNEL")))
+ChannelLoggingHandler handler = new ChannelLoggingHandler(gatewayClient.getChannelById(Snowflake.of("your channel id")).typeOf(GuildMessageChannel.class))
         .attach() // attach to SLF4J JDK logging if present, else Log4j if present, else standard out/err
         .schedule(); // schedule handler to flush output asynchronously every 1.5 seconds
 ```
@@ -16,36 +16,27 @@ ChannelLoggingHandler handler = new ChannelLoggingHandler(() -> jda.getTextChann
 Customizing config values, such as adding a logger name mapping:
 
 ```java
-ChannelLoggingHandler handler = new ChannelLoggingHandler(() -> jda.getTextChannelById(System.getenv("CHANNEL")), config -> {
+ChannelLoggingHandler handler = new ChannelLoggingHandler(gatewayClient.getChannelById(Snowflake.of("your channel id")).typeOf(GuildMessageChannel.class), config -> {
     config.setColored(true); // enable coloring of different log levels, default true
     config.setSplitCodeBlockForLinks(false); // split the output code blocks when a link is present, default false
     config.setAllowLinkEmbeds(true); // when splitting code blocks for links, allow the links to have an embed, default true
-    config.mapLoggerName("net.dv8tion.jda", "JDA"); // add a mapping for logger names "net.dv8tion.jda*" to just be "JDA"
+    config.mapLoggerName("discord4j", "Discord"); // add a mapping for logger names "net.dv8tion.jda*" to just be "JDA"
 }).attach().schedule();
 ```
 
 # Artifact
 ```xml
 <repository>
-    <id>scarsz</id>
-    <url>https://nexus.scarsz.me/content/repositories/releases/</url>
+    <id>azimkin-repo-releases</id>
+    <url>https://repo.azimkin.top/releases</url>
 </repository>
 ```
 ```xml
-<!-- JDA 5 -->
+<!-- discord4j -->
 <dependency>
     <groupId>me.scarsz.jdaappender</groupId>
-    <artifactId>jda5</artifactId>
-    <version>1.2.3</version>
-</dependency>
-
-    or
-
-<!-- JDA 4 -->
-<dependency>
-    <groupId>me.scarsz.jdaappender</groupId>
-    <artifactId>jda4</artifactId>
-    <version>1.2.3</version>
+    <artifactId>discord4j</artifactId>
+    <version>1.2.4</version>
 </dependency>
 ```
 
@@ -61,3 +52,6 @@ picked up by JDAAppender with `ChannelLoggingHandler#attachJavaLogging`.
     <version>1.7.31</version>
 </dependency>
 ```
+
+Author: [Scarsz](https://github.com/Scarsz/)
+Original library: [JDAAppender](https://github.com/Scarsz/JDAAppender)
